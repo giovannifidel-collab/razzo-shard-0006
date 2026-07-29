@@ -1,0 +1,25 @@
+name: RAZZO Shard Worker
+on:
+  push:
+    paths: ["razzo-shard.json"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate shard manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s razzo-shard.json
+          python - <<'PY'
+          import json
+          p=json.load(open('razzo-shard.json'))
+          assert p['schema']=='RAZZO_SHARD_V1'
+          assert p['state']=='PROVISIONED'
+          assert p['shard_id']=='razzo-shard-0006'
+          print('HEALTHY', p['shard_id'])
+          PY
