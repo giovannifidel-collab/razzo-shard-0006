@@ -1,0 +1,1 @@
+{"schema":"RAZZO_SHARD_V1","shard_id":"razzo-shard-0006","state":"PROVISIONED","control_plane":"giovannifidel-collab/pfarma-ci","worker_workflow":".github/workflows/razzo-shard-worker.yml","product_progress":false}
